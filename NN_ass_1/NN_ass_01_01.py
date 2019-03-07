@@ -9,7 +9,7 @@ train_out_path = "train_out.csv"
 test_in_path = "test_in.csv"
 test_out_path = "test_out.csv"
 
-train_in = np.genfromtxt ( DATA_PATH + train_in_path, dtype = 'float', delimiter = ',' )
+train_in = np.genfromtxt( DATA_PATH + train_in_path, dtype = 'float', delimiter = ',' )
 train_out = np.genfromtxt ( DATA_PATH + train_out_path, dtype = 'float', delimiter = ',' )
 test_in = np.genfromtxt ( DATA_PATH + test_in_path, dtype = 'float', delimiter = ',' )
 test_out = np.genfromtxt ( DATA_PATH + test_out_path, dtype = 'float', delimiter = ',' )
