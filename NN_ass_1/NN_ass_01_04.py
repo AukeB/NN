@@ -1,21 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import random
-import sys
 from scipy.spatial import distance
+import os, sys, random
 
 # Paths and filenames.
-DATA_PATH = "/vol/home/s1594443/Desktop/NN/Assignment_01/data/"
-train_in_path = "train_in.csv"
-train_out_path = "train_out.csv"
-test_in_path = "test_in.csv"
-test_out_path = "test_out.csv"
+PATH = "/vol/home/s1594443/Desktop/NN/NN_ass_1/" # Change this to the directory where the code is located.
+train_in_path = "data/train_in.csv" # Put all the .csv files in a folder called data.
+train_out_path = "data/train_out.csv"
+test_in_path = "data/test_in.csv"
+test_out_path = "data/test_out.csv"
 
 # Importing data.
-train_in = np.genfromtxt(DATA_PATH+train_in_path,dtype='float',delimiter=',')
-train_out = np.genfromtxt(DATA_PATH+train_out_path,dtype='float',delimiter=',')
-test_in = np.genfromtxt(DATA_PATH+test_in_path,dtype='float',delimiter=',')
-test_out = np.genfromtxt(DATA_PATH+test_out_path,dtype='float',delimiter=',')
+train_in = np.genfromtxt(PATH+train_in_path,dtype='float',delimiter=',')
+train_out = np.genfromtxt(PATH+train_out_path,dtype='float',delimiter=',')
+test_in = np.genfromtxt(PATH+test_in_path,dtype='float',delimiter=',')
+test_out = np.genfromtxt(PATH+test_out_path,dtype='float',delimiter=',')
 
 # Functions.
 def train_perceptron(data_in,labels,weights): # Changes weights.
@@ -48,10 +47,13 @@ def train_perceptron(data_in,labels,weights): # Changes weights.
 		weighted_sum = np.dot(data_in,weights)
 		output_indices = np.argmax(weighted_sum,axis=1)
 
-	sys.stdout.write ( "Iterations: {0}\n".format ( iteration ) )
-	plt.xlabel("Number of iterations.")
+	plt.xlabel("Number of iterations ({0} total).".format(iteration))
 	plt.ylabel("Percentage correctly classified digits.")
-	plt.show ()
+	if not os.path.exists(PATH+"plots"): os.makedirs(PATH+"plots")
+	plt.savefig("plots/NN_ass_01_04_iter={0}.png".format(iteration))
+	plt.close()
+	sys.stdout.write("Figure saved as plots/NN_ass_01_04_iter={0}.png\n".format(iteration))
+	sys.stdout.write ( "Iterations: {0}\n".format ( iteration ) )
 
 	return weights
 
